@@ -41,16 +41,36 @@ class _ThirdRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
-      padding: EdgeInsets.only(top: _CELL_PADDING),
-      child: Row(
-        children: [
+        padding: EdgeInsets.only(top: _CELL_PADDING),
+        child: Row(children: [
           Expanded(child: Container(color: Colors.blue[400], height: 100)),
           Expanded(child: Container(color: Colors.green[400], height: 100)),
           Expanded(child: Container(color: Colors.yellow[400], height: 100)),
           Expanded(child: Container(color: Colors.pink[400], height: 100)),
-        ])
+        ]));
+  }
+}
 
+class _AdjustableBlock extends StatelessWidget {
+  final double widthFactor;
+
+  _AdjustableBlock(this.widthFactor);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: _CELL_PADDING),
+      child: Row(
+        children: [
+          Expanded(
+            child: FractionallySizedBox(
+              alignment: Alignment.centerLeft,
+              widthFactor: widthFactor,
+              child: Container(color: Colors.blue, height: 20),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -68,6 +88,9 @@ class ColorLayout extends StatelessWidget {
         _FirstRow(),
         _SecondRow(),
         _ThirdRow(),
+        _AdjustableBlock(1.0),
+        _AdjustableBlock(0.75),
+        _AdjustableBlock(0.55)
       ]),
     ));
   }
